@@ -22,6 +22,7 @@ menu.debug=Debug
 # ----------------------------------
 # Teknikio Bluebird
 # ----------------------------------
+
 bluebird.name=Teknikio Bluebird
 bluebird.bootloader.tool=bootburn
 
