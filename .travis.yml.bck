@@ -30,7 +30,9 @@ jobs:
     - name: "ItsyBitsy nRF52840 Express"
       env:  VARIANT="itsybitsy52840"
     - name: "Clue nRF52840"
-      env:  VARIANT="cluenrf52840"      
+      env:  VARIANT="cluenrf52840"
+    - name: "Teknikio Bluebird"
+      env:  VARIANT="bluebird"      
   allow_failures:
     - env:  ALL_WARNINGS="true" VARIANT="feather52840"
     - env:  ALL_WARNINGS="true" VARIANT="cplaynrf52840"
