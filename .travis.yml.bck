@@ -27,15 +27,15 @@ jobs:
       env:  VARIANT="feather52832"
     - name: "Feather nRF52832 (All warnings)"
       env:  ALL_WARNINGS="true" VARIANT="feather52832"
-    - name: "ItsyBitsy nRF52840 Express" 
+    - name: "ItsyBitsy nRF52840 Express"
       env:  VARIANT="itsybitsy52840"
-    - name: "Clue nRF52840" 
+    - name: "Clue nRF52840"
       env:  VARIANT="cluenrf52840"      
   allow_failures:
     - env:  ALL_WARNINGS="true" VARIANT="feather52840"
     - env:  ALL_WARNINGS="true" VARIANT="cplaynrf52840"
     - env:  ALL_WARNINGS="true" VARIANT="feather52832"
-    
+
 addons:
   apt:
     packages:
@@ -63,6 +63,6 @@ install:
   - arduino --install-library "Adafruit NeoPixel","Adafruit NeoMatrix","Adafruit GFX Library","Adafruit SSD1306","MIDI Library","Adafruit ILI9341","Adafruit HX8357 Library","Adafruit Circuit Playground"
 
 before_script:
-  
+
 script:
   - python3 tools/build_all_travis.py
