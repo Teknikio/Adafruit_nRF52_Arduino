@@ -43,7 +43,7 @@ extern "C"
 #define NUM_ANALOG_OUTPUTS   (0)
 
 // LEDs
-#define PIN_NEOPIXEL         (26)
+#define PIN_NEOPIXEL         (47)
 
 /*
 * Analog pins
@@ -85,8 +85,8 @@ static const uint8_t A9  = PIN_A9 ;
 */
 #define WIRE_INTERFACES_COUNT 2
 
-#define PIN_WIRE_SDA        (4)
-#define PIN_WIRE_SCL        (11)
+#define PIN_WIRE_SDA        (44)
+#define PIN_WIRE_SCL        (43)
 
 #define USB_MSC_BLOCK_SIZE    512
 #define USB_MSC_BLOCK_COUNT   ((2*1024*1024) / USB_MSC_BLOCK_SIZE)

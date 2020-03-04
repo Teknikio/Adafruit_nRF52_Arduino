@@ -37,6 +37,7 @@ const uint32_t g_ADigitalPinMap[] =
   7,
   8,
   11,
+  12,
   28,//COLOR SENSOR
   30,//COLOR SENSOR ENABLE
 
@@ -44,9 +45,11 @@ const uint32_t g_ADigitalPinMap[] =
   40, //P1.08
   41, //P1.09
   42,//ACCELEROMETER INTERRUPT
-  47,//SPEAKER
   43,//ACCELEROMETER SCL
   44,//ACCELEROMETER SDA
+  45,
+  46,//SPEAKER
+  47,//RGBLED
 };
 
 
