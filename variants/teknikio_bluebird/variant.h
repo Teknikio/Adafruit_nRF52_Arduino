@@ -84,6 +84,8 @@ static const uint8_t A9  = PIN_A9 ;
 */
 #define WIRE_INTERFACES_COUNT 1
 
+#define LED_BUILTIN          PIN_A8
+#define LED_CONN             PIN_A9
 #define LED_RED              PIN_A8
 #define LED_BLUE             PIN_A9
 
