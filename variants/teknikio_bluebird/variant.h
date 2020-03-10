@@ -45,6 +45,7 @@ extern "C"
 // LEDs
 #define PIN_NEOPIXEL         (47)
 
+#define LED_STATE_ON         0         // State when LED is litted
 /*
 * Analog pins
 */
