@@ -84,7 +84,7 @@ static const uint8_t A9  = PIN_A9 ;
 /*
 * Wire Interfaces
 */
-#define WIRE_INTERFACES_COUNT 2
+#define WIRE_INTERFACES_COUNT 1
 
 #define PIN_WIRE_SDA        (44)
 #define PIN_WIRE_SCL        (43)
