@@ -76,10 +76,8 @@ static const uint8_t A9  = PIN_A9 ;
 * Serial interfaces
 */
 // Serial
-#define PIN_SERIAL_RX       (7)
-#define PIN_SERIAL_TX       (8)
-
-
+#define PIN_SERIAL1_RX       (7)
+#define PIN_SERIAL1_TX       (8)
 
 /*
 * Wire Interfaces
