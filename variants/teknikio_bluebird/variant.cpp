@@ -27,30 +27,16 @@
 const uint32_t g_ADigitalPinMap[] =
 {
   // P0
-  29, //IO1
-  31, //IO2
-  2,  //IO3
-  3,  //IO4
-  4,
-  5,
-  6,
-  7,
-  8,
-  11,
-  12,
-  28,//COLOR SENSOR
-  30,//COLOR SENSOR ENABLE
+  0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 ,
+  8 , 9 , 10, 11, 12, 13, 14, 15,
+  16, 17, 18, 19, 20, 21, 22, 23,
+  24, 25, 26, 27, 28, 29, 30, 31,
 
   // P1
-  40, //P1.08
-  41, //P1.09
-  42,//ACCELEROMETER INTERRUPT
-  43,//ACCELEROMETER SCL
-  44,//ACCELEROMETER SDA
-  45,
-  46,//SPEAKER
-  47,//RGBLED
+  32, 33, 34, 35, 36, 37, 38, 39,
+  40, 41, 42, 43, 44, 45, 46, 47
 };
+
 
 
 void initVariant()
