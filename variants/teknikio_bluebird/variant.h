@@ -72,6 +72,7 @@ static const uint8_t A7  = PIN_A7 ;
 
 #define ADC_RESOLUTION    14
 
+
 /*
 * Serial interfaces
 */
@@ -89,13 +90,18 @@ static const uint8_t A7  = PIN_A7 ;
 #define LED_RED              PIN_A8
 #define LED_BLUE             PIN_A9
 
+//Board terminals - calling
+#define BLUEBIRD_IO1        PIN_A5
+#define BLUEBIRD_IO2        PIN_A7
+#define BLUEBIRD_IO3        PIN_A0
+#define BLUEBIRD_IO4        PIN_A1
+
 #define PIN_WIRE_SDA        (44)
 #define PIN_WIRE_SCL        (43)
 #define PIN_WIRE_INT		(45)
 
 #define PIN_BUZZER      	(46)
 
-#define PIN_COLOR_SENSE     (28)
 #define PIN_COLOR_ENABLE    (30)
 
 #define USB_MSC_BLOCK_SIZE    512
