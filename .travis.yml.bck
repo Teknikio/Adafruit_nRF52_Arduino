@@ -15,28 +15,10 @@ env:
 jobs:
   fast_finish: true
   include:
-    - name: "Feather nRF52840"
-      env:  VARIANT="feather52840"
-    - name: "Feather nRF52840 (All warnings)"
-      env:  ALL_WARNINGS="true" VARIANT="feather52840"
-    - name: "Circuit Playground nRF52840"
-      env:  VARIANT="cplaynrf52840"
-    - name: "Circuit Playground nRF52840 (All warnings)"
-      env:  ALL_WARNINGS="true" VARIANT="cplaynrf52840"
-    - name: "Feather nRF52832"
-      env:  VARIANT="feather52832"
-    - name: "Feather nRF52832 (All warnings)"
-      env:  ALL_WARNINGS="true" VARIANT="feather52832"
-    - name: "ItsyBitsy nRF52840 Express"
-      env:  VARIANT="itsybitsy52840"
-    - name: "Clue nRF52840"
-      env:  VARIANT="cluenrf52840"
     - name: "Teknikio Bluebird"
-      env:  VARIANT="bluebird"      
+      env:  VARIANT="bluebird"
   allow_failures:
-    - env:  ALL_WARNINGS="true" VARIANT="feather52840"
-    - env:  ALL_WARNINGS="true" VARIANT="cplaynrf52840"
-    - env:  ALL_WARNINGS="true" VARIANT="feather52832"
+    - env:  ALL_WARNINGS="true" VARIANT="bluebird"
 
 addons:
   apt:
