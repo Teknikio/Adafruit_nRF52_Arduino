@@ -1,36 +1,33 @@
-#include <Bluebird_Circuit_Playground.h>
+#include <Bluebird_Teknikio.h>
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   delay(4000);
   Serial.println("Bluebird Neopixel test: START");
-  bluebirdCircuitPlayground.begin();
+  bluebird.begin();
   delay(50);
 }
 
 void loop() { 
   Serial.print("x = ");
-  Serial.print(bluebirdCircuitPlayground.rotationX());
+  Serial.print(bluebird.rotationX());
   Serial.println(" dps");
   Serial.print("y = ");
-  Serial.print(bluebirdCircuitPlayground.rotationY());
+  Serial.print(bluebird.rotationY());
   Serial.println(" dps");
   Serial.print("z = ");
-  Serial.print(bluebirdCircuitPlayground.rotationZ());
+  Serial.print(bluebird.rotationZ());
   Serial.println(" dps");
   Serial.print("x = ");
-  Serial.print(bluebirdCircuitPlayground.motionX());
+  Serial.print(bluebird.motionX());
   Serial.println(" mg");
   Serial.print("y = ");
-  Serial.print(bluebirdCircuitPlayground.motionY());
+  Serial.print(bluebird.motionY());
   Serial.println(" mg");
   Serial.print("z = ");
-  Serial.print(bluebirdCircuitPlayground.motionZ());
+  Serial.print(bluebird.motionZ());
   Serial.println(" mg");
-  Serial.print("t = ");
-  Serial.print(bluebirdCircuitPlayground.icm20600.getTemperature());
-  Serial.println(" °C");
   delay(100);
   Serial.println("Bluebird Neopixel test: End of Sequence");
 }
