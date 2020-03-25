@@ -27,7 +27,8 @@ variants_dict = {
     'cplaynrf52840': 'Circuit Playground Bluefruit Express',
     'itsybitsy52840': 'ItsyBitsy nRF52840 Express',
     'cluenrf52840': 'Clue nRF52840',
-    'feather52832': 'Feather nRF52832'
+    'feather52832': 'Feather nRF52832',
+    'bluebird': 'Teknikio Bluebird'
 }
 
 # STDERR receives output that starts with the following text, none of which should be considered a warning or error...
@@ -61,7 +62,7 @@ def build_examples(variant):
     print(build_separator)
     subprocess.run("arduino --board adafruit:nrf52:{}:softdevice={},debug=l0 --save-prefs".format(variant, 's140v6' if variant != 'feather52832' else 's132v6'), shell=True,
                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    
+
     if all_warnings:
         subprocess.run("arduino --pref 'compiler.warning_level=all' --save-prefs", shell=True,
                        stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -119,7 +120,7 @@ def build_examples(variant):
                     print(line)
 
         if travis:
-            print('travis_fold:end:build-{}\\r'.format(sketch))            
+            print('travis_fold:end:build-{}\\r'.format(sketch))
 
 
 build_time = time.monotonic()
