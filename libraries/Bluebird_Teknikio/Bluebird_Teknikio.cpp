@@ -1,16 +1,10 @@
 /*!
- * @file Adafruit_CircuitPlayground.cpp
- *
- * @mainpage Adafruit CircuitPlayground Library
  *
  * @section intro_sec Introduction
  *
- * This is the documentation for Adafruit's CircuitPlayground driver for the
+ * This is adapted by Teknikio  from Adafruit's CircuitPlayground driver for the
  * Arduino platform.  It is designed specifically to work with the
- * Adafruit CircuitPlayground boards:
- *  - https://www.adafruit.com/products/3000
- *  - https://www.adafruit.com/products/3333
- *
+ * Teknikio Bluebird boards.
  *
  * Adafruit invests time and resources providing this open source code,
  * please support Adafruit and open-source hardware by purchasing
@@ -31,7 +25,7 @@
 
 /**************************************************************************/
 /*!
-    @brief  Set up the CircuitPlayground hardware
+    @brief  Set up the Bluebird hardware
     @param  brightness Optional brightness to set the neopixels to
     @returns True if device is set up, false on any failure
 */
@@ -72,7 +66,6 @@ bool Bluebird::begin(uint8_t brightness) {
   max_blue = 0;
 
 
-  //return lis.begin(CPLAY_LIS3DH_ADDRESS);
   return true;
 }
 

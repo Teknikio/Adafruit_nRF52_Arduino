@@ -1,5 +1,17 @@
 #include <Bluebird_Teknikio.h>
 
+/*Calibrate the light sensor on Bluebird to sense color using the reflection from the Neopixel
+You will need a white object (like paper) and a black object to teach the sensor these colors.
+
+TO BEGIN CALIBRATION: 
+
+Send any character in serial console and follow prompts
+When calibration is finished, test sensor with different colors
+Color reported as R,G,B percentage 
+
+*/
+
+
 bool calibration = false;
 bool tmp_status = true;
 int incomingByte=0;
@@ -11,7 +23,7 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   delay(4000);
-  Serial.println("Bluebird Neopixel test: START");
+  Serial.println("Bluebird Color Sensor Calibration");
   bluebird.begin();
   while(Serial.available()==0)
   {
@@ -37,7 +49,8 @@ void loop() {
 
   if( calibration == false)
   {
-    Serial.println("Thanks to present a white sheet in front of the sensors");
+    //bounce colors off of white
+    Serial.println("Please place a white sheet in front of the sensors");
     while (Serial.available() == 0) {
      delay(100);
      if( tmp_status == true)
@@ -66,7 +79,8 @@ void loop() {
     Serial.print("Blue : ");
     Serial.print(bluebird.max_blue);
     Serial.println(" "); 
-    Serial.println("Thanks to present a black sheet in front of the sensors");
+    //
+    Serial.println("Please place a black sheet in front of the sensors");
     while (Serial.available() == 0) {
      delay(100);
      if( tmp_status == true)
@@ -96,11 +110,12 @@ void loop() {
     Serial.print(bluebird.min_blue);
     Serial.println(" "); 
 
-    Serial.println("End of the calibration"); 
+    Serial.println("End of the calibration, color sensor is ready."); 
     calibration = true;
+    delay(5000);  //wait 
   }
   else{
-    
+    Serial.println("Place an object in front of sensor to read color"); 
     bluebird.senseColor(value_red,value_green,value_blue);
 
     Serial.print("Red : ");
@@ -112,7 +127,20 @@ void loop() {
     Serial.print("Blue : ");
     Serial.print(value_blue);
     Serial.println(" %"); 
-    delay(100);
+
+    if( value_red > 95)
+    {
+      Serial.println("This looks red"); 
+    }
+    if( value_green > 95)
+    {
+      Serial.println("This looks green"); 
+    }
+    if( value_blue > 95)
+    {
+      Serial.println("This looks blue"); 
+    }
+    delay(1000);
   }
   
 }

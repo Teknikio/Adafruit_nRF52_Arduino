@@ -85,7 +85,7 @@ void suspendLoop(void);
 #undef abs
 #endif // abs
 
-#ifdef __cplusplus
+/*#ifdef __cplusplus
   template<class T, class L> 
   auto min(const T& a, const L& b) -> decltype((b < a) ? b : a)
   {
@@ -97,7 +97,7 @@ void suspendLoop(void);
   {
     return (a < b) ? b : a;
   }
-#else
+#else*/
 #ifndef min
 #define min(a,b) \
    ({ __typeof__ (a) _a = (a); \
@@ -110,7 +110,7 @@ void suspendLoop(void);
        __typeof__ (b) _b = (b); \
      _a > _b ? _a : _b; })
 #endif
-#endif
+//#endif
 
 #define abs(x) ((x)>0?(x):-(x))
 #define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))

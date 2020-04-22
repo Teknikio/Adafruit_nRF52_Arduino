@@ -96,11 +96,6 @@ void adafruit_soc_task(void* arg);
 /*------------------------------------------------------------------*/
 /* INTERNAL FUNCTION
  *------------------------------------------------------------------*/
-static void bluefruit_blinky_cb( TimerHandle_t xTimer )
-{
-  (void) xTimer;
-  digitalToggle(LED_BLUE);
-}
 
 static void nrf_error_cb(uint32_t id, uint32_t pc, uint32_t info)
 {
@@ -122,7 +117,7 @@ static void nrf_error_cb(uint32_t id, uint32_t pc, uint32_t info)
     LOG_LV1("SD Err", "assert at %s : %d", assert_info->p_file_name, assert_info->line_num);
   }
 
-  while(1) { }
+  while(1) yield();
 #endif
 }
 
@@ -141,7 +136,7 @@ AdafruitBluefruit::AdafruitBluefruit(void)
   /*------------------------------------------------------------------*/
   varclr(&_sd_cfg);
 
-  _sd_cfg.attr_table_size = 0x800;
+  _sd_cfg.attr_table_size = CFG_SD_ATTR_TABLE_SIZE;
   _sd_cfg.uuid128_max     = BLE_UUID_VS_COUNT_DEFAULT;
   _sd_cfg.service_changed = 1;
 
@@ -163,9 +158,6 @@ AdafruitBluefruit::AdafruitBluefruit(void)
   _ble_event_sem = NULL;
   _soc_event_sem = NULL;
 
-  _led_blink_th  = NULL;
-  _led_conn      = true;
-
   _tx_power      = CFG_BLE_TX_POWER_LEVEL;
 
   _conn_hdl      = BLE_CONN_HANDLE_INVALID;
@@ -186,11 +178,6 @@ AdafruitBluefruit::AdafruitBluefruit(void)
                   .kdist_own    = { .enc = 1, .id = 1},
                   .kdist_peer   = { .enc = 1, .id = 1},
                 });
-
-COMMENT_OUT(
-  _auth_type = BLE_GAP_AUTH_KEY_TYPE_NONE;
-  varclr(_pin);
-)
 }
 
 void AdafruitBluefruit::configServiceChanged(bool changed)
@@ -326,7 +313,7 @@ bool AdafruitBluefruit::begin(uint8_t prph_count, uint8_t central_count)
    * prph and central connections for optimal SRAM usage.
    *
    * - If Peripheral mode is enabled
-   *   - ATTR Table Size          = 0x800.
+   *   - ATTR Table Size          = CFG_SD_ATTR_TABLE_SIZE.
    *   - HVN TX Queue Size        = 3
    *
    * - If Central mode is enabled
@@ -484,9 +471,6 @@ bool AdafruitBluefruit::begin(uint8_t prph_count, uint8_t central_count)
 
   NVIC_EnableIRQ(SD_EVT_IRQn); // enable SD interrupt
 
-  // Create Timer for led advertising blinky
-  _led_blink_th = xTimerCreate(NULL, ms2tick(CFG_ADV_BLINKY_INTERVAL/2), true, NULL, bluefruit_blinky_cb);
-
   // Initialize bonding
   bond_init();
 
@@ -562,20 +546,6 @@ bool AdafruitBluefruit::setTxPower(int8_t power)
 int8_t AdafruitBluefruit::getTxPower(void)
 {
   return _tx_power;
-}
-
-void AdafruitBluefruit::autoConnLed(bool enabled)
-{
-  _led_conn = enabled;
-}
-
-void AdafruitBluefruit::setConnLedInterval(uint32_t ms)
-{
-  BaseType_t active = xTimerIsTimerActive(_led_blink_th);
-  xTimerChangePeriod(_led_blink_th, ms2tick(ms), 0);
-
-  // Change period of inactive timer will also start it !!
-  if ( !active ) xTimerStop(_led_blink_th, 0);
 }
 
 bool AdafruitBluefruit::setAppearance(uint16_t appear)
@@ -790,9 +760,6 @@ void AdafruitBluefruit::_ble_handler(ble_evt_t* evt)
   {
     case BLE_GAP_EVT_CONNECTED:
     {
-      // Turn on Conn LED
-      _stopConnLed();
-      _setConnLed(true);
 
       ble_gap_evt_connected_t const * para = &evt->evt.gap_evt.params.connected;
 
@@ -830,9 +797,7 @@ void AdafruitBluefruit::_ble_handler(ble_evt_t* evt)
 
       LOG_LV2("GAP", "Disconnect Reason 0x%02X", evt->evt.gap_evt.params.disconnected.reason);
 
-      // Turn off Conn LED If not connected at all
-      if ( !this->connected() ) _setConnLed(false);
-
+      
       // Invoke disconnect callback
       if ( conn->getRole() == BLE_GAP_ROLE_PERIPH )
       {
@@ -927,25 +892,7 @@ void AdafruitBluefruit::_ble_handler(ble_evt_t* evt)
 /*------------------------------------------------------------------*/
 /* Internal Connection LED
  *------------------------------------------------------------------*/
-void AdafruitBluefruit::_startConnLed(void)
-{
-  if (_led_conn) xTimerStart(_led_blink_th, 0);
-}
 
-void AdafruitBluefruit::_stopConnLed(void)
-{
-  xTimerStop(_led_blink_th, 0);
-
-  _setConnLed( this->connected() );
-}
-
-void AdafruitBluefruit::_setConnLed (bool on_off)
-{
-  if (_led_conn)
-  {
-    digitalWrite(LED_BLUE, on_off ? LED_STATE_ON : (1-LED_STATE_ON) );
-  }
-}
 
 /*------------------------------------------------------------------*/
 /* Bonds

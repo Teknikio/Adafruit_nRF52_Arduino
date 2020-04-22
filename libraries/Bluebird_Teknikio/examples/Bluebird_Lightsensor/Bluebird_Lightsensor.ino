@@ -6,7 +6,7 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   delay(4000);
-  Serial.println("Bluebird Neopixel test: START");
+  Serial.println("Bluebird Light Sensor test: START");
   bluebird.begin();
 
   bluebird.setPixelColor(0,0,0,0 ); // Red

@@ -1,14 +1,8 @@
 /*!
- * @file Adafruit_Circuit_Playground.h
+ * This is adapted by Teknikio from  Adafruit's CircuitPlayground driver for the Arduino platform.  It is
+ * designed specifically to work with the Teknikio Bluebird boards.
  *
- * This is part of Adafruit's CircuitPlayground driver for the Arduino platform.  It is
- * designed specifically to work with the Adafruit CircuitPlayground boards.
- *
- * Adafruit invests time and resources providing this open source code,
- * please support Adafruit and open-source hardware by purchasing
- * products from Adafruit!
- *
- * Written by Ladyada and others for Adafruit Industries.
+ * Originally written by Ladyada and others for Adafruit Industries.
  *
  * BSD license, all text here must be included in any redistribution.
  *
@@ -19,7 +13,7 @@
 
 #include <Arduino.h>
 #include "utility/Bluebird_NeoPixel.h"
-#include "utility/CP_Firmata.h"
+#include "utility/TK_Firmata.h"
 #include "utility/ICM20600.h"
 
 #ifndef NOT_AN_INTERRUPT // Not defined in Arduino 1.0.5
@@ -132,6 +126,29 @@
 #define NOTE_D8  4699
 #define NOTE_DS8 4978
 
+
+
+const uint8_t gamma8[] = {
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+  1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3,
+  3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6,
+  6, 6, 6, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 10, 10,
+  11, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17,
+  18, 19, 19, 20, 20, 21, 22, 23, 23, 24, 25, 26, 26, 27, 28,
+  29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+  45, 46, 47, 49, 50, 51, 53, 54, 56, 57, 59, 60, 62, 63, 65,
+  67, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94,
+  97, 99, 101, 104, 106, 109, 111, 114, 116, 119, 122, 125, 128, 130, 133,
+  136, 139, 143, 146, 149, 152, 156, 159, 162, 166, 170, 173, 177, 181, 184,
+  188, 192, 196, 200, 205, 209, 213, 217, 222, 226, 231, 236, 240, 245, 250,
+  255 };
+
+
 /*! 
   @brief Configuration to tune the color sensing logic:
    Amount of time (in milliseconds) to wait between 
@@ -142,7 +159,7 @@
 
 /**************************************************************************/
 /*! 
-    @brief  Class that stores state and functions for interacting with CircuitPlayground hardware
+    @brief  Class that stores state and functions for interacting with Bluebird hardware
 */
 /**************************************************************************/
 class Bluebird {
@@ -205,7 +222,7 @@ class Bluebird {
   @param b a 0 to 255 value corresponding to the blue component of the desired color.  
 */
 /**************************************************************************/
-  void setPixelColor(uint8_t p, uint8_t r, uint8_t g, uint8_t b) {strip.setPixelColor(p, r, g, b); strip.show();}
+  void setPixelColor(uint8_t p, uint8_t r, uint8_t g, uint8_t b) {strip.setPixelColor(p, gamma8[r], gamma8[g], gamma8[b]); strip.show();}
   
 /*!  @brief set the global brightness of all neopixels.
      @param b a 0 to 255 value corresponding to the desired brightness. The default brightness
