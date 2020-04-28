@@ -1,16 +1,12 @@
-/*********************************************************************
- This is an example for our nRF52 based Bluefruit LE modules
-
- Pick one up today in the adafruit shop!
-
- Adafruit invests time and resources providing this open source code,
- please support Adafruit and open-source hardware by purchasing
- products from Adafruit!
-
- MIT license, check LICENSE for more information
- All text above, and the splash screen below must be included in
- any redistribution
-*********************************************************************/
+/*!
+ * This is adapted by Teknikio from  Bluefruit52Lib examples for the Arduino platform.  It is
+ * designed specifically to work with the Teknikio Bluebird boards.
+ *
+ * Originally written by and for Adafruit Industries.
+ *
+ * BSD license, all text here must be included in any redistribution.
+ *
+ */
 
 // This sketch is intended to be used with the NeoPixel control
 // surface in Adafruit's Bluefruit LE Connect mobile application.
@@ -25,11 +21,11 @@
 /* NOTE: This sketch required at least version 1.1.0 of Adafruit_Neopixel !!! */
 
 #include <Arduino.h>
-#include <Adafruit_NeoPixel.h>
+#include <Bluebird_Teknikio.h>
 #include <bluefruit.h>
 
 #define NEOPIXEL_VERSION_STRING "Neopixel v2.0"
-#define PIN                     30   /* Pin used to drive the NeoPixels */
+#define PIN                     BLUEBIRD_NEOPIXELPIN   /* Pin used to drive the NeoPixels */
 
 #define MAXCOMPONENTS  4
 uint8_t *pixelBuffer = NULL;
@@ -40,7 +36,7 @@ uint8_t componentsValue;
 bool is400Hz;
 uint8_t components = 3;     // only 3 and 4 are valid values
 
-Adafruit_NeoPixel neopixel = Adafruit_NeoPixel();
+Bluebird_NeoPixel neopixel = Bluebird_NeoPixel();
 
 // BLE Service
 BLEDfu  bledfu;
@@ -52,11 +48,11 @@ void setup()
   Serial.begin(115200);
   while ( !Serial ) delay(10);   // for nrf52840 with native usb
 
-  Serial.println("Adafruit Bluefruit Neopixel Test");
+  Serial.println("Teknikio Bluefruit Neopixel Test");
   Serial.println("--------------------------------");
 
   Serial.println();
-  Serial.println("Please connect using the Bluefruit Connect LE application");
+  Serial.println("Please use Teknikio's Tekniverse app");
   
   // Config Neopixels
   neopixel.begin();
@@ -64,15 +60,15 @@ void setup()
   // Init Bluefruit
   Bluefruit.begin();
   Bluefruit.setTxPower(4);    // Check bluefruit.h for supported values
-  Bluefruit.setName("Bluefruit52");
+  Bluefruit.setName("Bluebird");
   Bluefruit.Periph.setConnectCallback(connect_callback);
 
   // To be consistent OTA DFU should be added first if it exists
   bledfu.begin();
 
   // Configure and Start Device Information Service
-  bledis.setManufacturer("Adafruit Industries");
-  bledis.setModel("Bluefruit Feather52");
+  bledis.setManufacturer("Teknikio");
+  bledis.setModel("Bluebird");
   bledis.begin();  
 
   // Configure and start BLE UART service
@@ -121,7 +117,7 @@ void connect_callback(uint16_t conn_handle)
   Serial.print("Connected to ");
   Serial.println(central_name);
 
-  Serial.println("Please select the 'Neopixels' tab, click 'Connect' and have fun");
+  Serial.println("Please select the 'Tools' tab, click 'Connect' and have fun");
 }
 
 void loop()

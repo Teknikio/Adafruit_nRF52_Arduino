@@ -1,16 +1,12 @@
-/*********************************************************************
- This is an example for our nRF52 based Bluefruit LE modules
-
- Pick one up today in the adafruit shop!
-
- Adafruit invests time and resources providing this open source code,
- please support Adafruit and open-source hardware by purchasing
- products from Adafruit!
-
- MIT license, check LICENSE for more information
- All text above, and the splash screen below must be included in
- any redistribution
-*********************************************************************/
+/*!
+ * This is adapted by Teknikio from  Bluefruit52Lib examples for the Arduino platform.  It is
+ * designed specifically to work with the Teknikio Bluebird boards.
+ *
+ * Originally written by and for Adafruit Industries.
+ *
+ * BSD license, all text here must be included in any redistribution.
+ *
+ */
 
 /* This sketch demonstrates the Bluefruit.Advertising API(). When powered up,
  * the Bluefruit module will start advertising for ADV_TIMEOUT seconds (by
@@ -20,7 +16,7 @@
  */
 #include <bluefruit.h>
 
-#define PIN_ADV       A0
+#define PIN_ADV       A5
 #define ADV_TIMEOUT   60 // seconds
 
 void setup() 
@@ -31,12 +27,12 @@ void setup()
   Serial.begin(115200);
   while ( !Serial ) delay(10);   // for nrf52840 with native usb
 
-  Serial.println("Bluefruit52 Advanced Advertising Example");
+  Serial.println("Bluebird Advanced Advertising Example");
   Serial.println("----------------------------------------\n");
 
   Bluefruit.begin();
   Bluefruit.setTxPower(4);    // Check bluefruit.h for supported values
-  Bluefruit.setName("Bluefruit52");
+  Bluefruit.setName("Bluebird");
 
   // Set up and start advertising
   startAdv();

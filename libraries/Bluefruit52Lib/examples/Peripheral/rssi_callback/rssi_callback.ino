@@ -1,16 +1,12 @@
-/*********************************************************************
- This is an example for our nRF52 based Bluefruit LE modules
-
- Pick one up today in the adafruit shop!
-
- Adafruit invests time and resources providing this open source code,
- please support Adafruit and open-source hardware by purchasing
- products from Adafruit!
-
- MIT license, check LICENSE for more information
- All text above, and the splash screen below must be included in
- any redistribution
-*********************************************************************/
+/*!
+ * This is adapted by Teknikio from  Bluefruit52Lib examples for the Arduino platform.  It is
+ * designed specifically to work with the Teknikio Bluebird boards.
+ *
+ * Originally written by and for Adafruit Industries.
+ *
+ * BSD license, all text here must be included in any redistribution.
+ *
+ */
 #include <bluefruit.h>
 
 BLEUart bleuart; // uart over ble
@@ -20,22 +16,16 @@ void setup()
   Serial.begin(115200);
   while ( !Serial ) delay(10);   // for nrf52840 with native usb
 
-  Serial.println("Bluefruit52 RSSI Example");
+  Serial.println("Bluebird RSSI Example");
   Serial.println("------------------------\n");
-
-  // Setup the BLE LED to be enabled on CONNECT
-  // Note: This is actually the default behaviour, but provided
-  // here in case you want to control this LED manually
-  Bluefruit.autoConnLed(true);
 
   // Config the peripheral connection with maximum bandwidth 
   // more SRAM required by SoftDevice
   // Note: All config***() function must be called before begin()
-  Bluefruit.configPrphBandwidth(BANDWIDTH_MAX);
 
   Bluefruit.begin();
   Bluefruit.setTxPower(4);    // Check bluefruit.h for supported values
-  Bluefruit.setName("Bluefruit52");
+  Bluefruit.setName("Bluebird");
   Bluefruit.Periph.setConnectCallback(connect_callback);
   Bluefruit.Periph.setDisconnectCallback(disconnect_callback);  
   
@@ -48,7 +38,7 @@ void setup()
   // Set up and start advertising
   startAdv();
 
-  Serial.println("Please use Adafruit's Bluefruit LE app to connect");
+  Serial.println("Please use Teknikio's Tekniverse app to connect");
 }
 
 void startAdv(void)

@@ -1,16 +1,12 @@
-/*********************************************************************
- This is an example for our nRF52 based Bluefruit LE modules
-
- Pick one up today in the adafruit shop!
-
- Adafruit invests time and resources providing this open source code,
- please support Adafruit and open-source hardware by purchasing
- products from Adafruit!
-
- MIT license, check LICENSE for more information
- All text above, and the splash screen below must be included in
- any redistribution
-*********************************************************************/
+/*!
+ * This is adapted by Teknikio from  Bluefruit52Lib examples for the Arduino platform.  It is
+ * designed specifically to work with the Teknikio Bluebird boards.
+ *
+ * Originally written by and for Adafruit Industries.
+ *
+ * BSD license, all text here must be included in any redistribution.
+ *
+ */
 
 /*
  * This sketch demonstrate how to run both Central and Peripheral roles
@@ -35,14 +31,14 @@ void setup()
   Serial.begin(115200);
   while ( !Serial ) delay(10);   // for nrf52840 with native usb
 
-  Serial.println("Bluefruit52 Dual Role BLEUART Example");
+  Serial.println("Bluebird Dual Role BLEUART Example");
   Serial.println("-------------------------------------\n");
   
   // Initialize Bluefruit with max concurrent connections as Peripheral = 1, Central = 1
   // SRAM usage required by SoftDevice will increase with number of connections
   Bluefruit.begin(1, 1);
   Bluefruit.setTxPower(4);    // Check bluefruit.h for supported values
-  Bluefruit.setName("Bluefruit52 duo");
+  Bluefruit.setName("Bluebird duo");
 
   // Callbacks for Peripheral
   Bluefruit.Periph.setConnectCallback(prph_connect_callback);

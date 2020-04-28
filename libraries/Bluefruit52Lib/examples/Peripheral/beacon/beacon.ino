@@ -1,16 +1,12 @@
-/*********************************************************************
- This is an example for our nRF52 based Bluefruit LE modules
-
- Pick one up today in the adafruit shop!
-
- Adafruit invests time and resources providing this open source code,
- please support Adafruit and open-source hardware by purchasing
- products from Adafruit!
-
- MIT license, check LICENSE for more information
- All text above, and the splash screen below must be included in
- any redistribution
-*********************************************************************/
+/*!
+ * This is adapted by Teknikio from  Bluefruit52Lib examples for the Arduino platform.  It is
+ * designed specifically to work with the Teknikio Bluebird boards.
+ *
+ * Originally written by and for Adafruit Industries.
+ *
+ * BSD license, all text here must be included in any redistribution.
+ *
+ */
 #include <bluefruit.h>
 
 // Beacon uses the Manufacturer Specific Data field in the advertising
@@ -18,7 +14,7 @@
 // the field below to an appropriate value. For a list of valid IDs see:
 // https://www.bluetooth.com/specifications/assigned-numbers/company-identifiers
 // 0x004C is Apple (for example)
-#define MANUFACTURER_ID   0x004C 
+#define MANUFACTURER_ID   0xBBDD 
 
 // AirLocate UUID: E2C56DB5-DFFB-48D2-B060-D0F5A71096E0
 uint8_t beaconUuid[16] = 
@@ -36,15 +32,14 @@ void setup()
   Serial.begin(115200);
   while ( !Serial ) delay(10);   // for nrf52840 with native usb
 
-  Serial.println("Bluefruit52 Beacon Example");
+  Serial.println("Bluebird Beacon Example");
   Serial.println("--------------------------\n");
 
   Bluefruit.begin();
 
   // off Blue LED for lowest power consumption
-  Bluefruit.autoConnLed(false);
   Bluefruit.setTxPower(0);    // Check bluefruit.h for supported values
-  Bluefruit.setName("Bluefruit52");
+  Bluefruit.setName("Bluebird");
 
   // Manufacturer ID is required for Manufacturer Specific Data
   beacon.setManufacturer(MANUFACTURER_ID);
@@ -78,7 +73,6 @@ void startAdv(void)
    * - Type: Non connectable, undirected
    * - Fixed interval: 100 ms -> fast = slow = 100 ms
    */
-  //Bluefruit.Advertising.setType(BLE_GAP_ADV_TYPE_ADV_NONCONN_IND);
   Bluefruit.Advertising.restartOnDisconnect(true);
   Bluefruit.Advertising.setInterval(160, 160);    // in unit of 0.625 ms
   Bluefruit.Advertising.setFastTimeout(30);      // number of seconds in fast mode

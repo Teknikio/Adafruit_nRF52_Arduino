@@ -1,16 +1,13 @@
-/*********************************************************************
- This is an example for our nRF52 based Bluefruit LE modules
+/*!
+ * This is adapted by Teknikio from  Bluefruit52Lib examples for the Arduino platform.  It is
+ * designed specifically to work with the Teknikio Bluebird boards.
+ *
+ * Originally written by and for Adafruit Industries.
+ *
+ * BSD license, all text here must be included in any redistribution.
+ *
+ */
 
- Pick one up today in the adafruit shop!
-
- Adafruit invests time and resources providing this open source code,
- please support Adafruit and open-source hardware by purchasing
- products from Adafruit!
-
- MIT license, check LICENSE for more information
- All text above, and the splash screen below must be included in
- any redistribution
-*********************************************************************/
 
 #include <bluefruit.h>
 
@@ -23,7 +20,7 @@ void setup()
   Serial.begin(115200);
   while ( !Serial ) delay(10);   // for nrf52840 with native usb
 
-  Serial.println("Bluefruit52 Central ADV Scan Example");
+  Serial.println("Bluebird Central ADV Scan Example");
   Serial.println("------------------------------------\n");
 
   // Initialize Bluefruit with maximum connections as Peripheral = 0, Central = 1
@@ -32,10 +29,7 @@ void setup()
   Bluefruit.setTxPower(4);    // Check bluefruit.h for supported values
 
   /* Set the device name */
-  Bluefruit.setName("Bluefruit52");
-
-  /* Set the LED interval for blinky pattern on BLUE LED */
-  Bluefruit.setConnLedInterval(250);
+  Bluefruit.setName("Bluebird");
 
   /* Start Central Scanning
    * - Enable auto scan if disconnected
@@ -46,8 +40,7 @@ void setup()
    */
   Bluefruit.Scanner.setRxCallback(scan_callback);
   Bluefruit.Scanner.restartOnDisconnect(true);
-  Bluefruit.Scanner.filterRssi(-80);
-  //Bluefruit.Scanner.filterUuid(BLEUART_UUID_SERVICE); // only invoke callback if detect bleuart service
+  Bluefruit.Scanner.filterRssi(-60);
   Bluefruit.Scanner.setInterval(160, 80);       // in units of 0.625 ms
   Bluefruit.Scanner.useActiveScan(true);        // Request scan response data
   Bluefruit.Scanner.start(0);                   // 0 = Don't stop scanning after n seconds

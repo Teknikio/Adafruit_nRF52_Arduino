@@ -1,19 +1,15 @@
-/*********************************************************************
- This is an example for our nRF52 based Bluefruit LE modules
-
- Pick one up today in the adafruit shop!
-
- Adafruit invests time and resources providing this open source code,
- please support Adafruit and open-source hardware by purchasing
- products from Adafruit!
-
- MIT license, check LICENSE for more information
- All text above, and the splash screen below must be included in
- any redistribution
-*********************************************************************/
+/*!
+ * This is adapted by Teknikio from  Bluefruit52Lib examples for the Arduino platform.  It is
+ * designed specifically to work with the Teknikio Bluebird boards.
+ *
+ * Originally written by and for Adafruit Industries.
+ *
+ * BSD license, all text here must be included in any redistribution.
+ *
+ */
 #include <bluefruit.h>
 
-#define URL   "https://www.adafruit.com"
+#define URL   "https://www.teknikio.com"
 
 // Create an EddyStone URL with rssi at 0m = -40 and URL as defined above
 EddyStoneUrl eddyUrl(-40, URL);
@@ -23,12 +19,12 @@ void setup()
   Serial.begin(115200);
   while ( !Serial ) delay(10);   // for nrf52840 with native usb
 
-  Serial.println("Bluefruit52 EddyStone URL Example");
+  Serial.println("Bluebird EddyStone URL Example");
   Serial.println("---------------------------------\n");
 
   Bluefruit.begin();
   Bluefruit.setTxPower(4);    // Check bluefruit.h for supported values
-  Bluefruit.setName("Bluefruit52");
+  Bluefruit.setName("Bluebird");
 
   // Setup the advertising packet
   startAdv();
@@ -66,7 +62,7 @@ void startAdv(void)
 void loop() 
 {
   // Toggle both LEDs every second
-  digitalToggle(LED_RED);
+
   delay(1000);
 }
 

@@ -1,16 +1,12 @@
-/*********************************************************************
- This is an example for our nRF52 based Bluefruit LE modules
-
- Pick one up today in the adafruit shop!
-
- Adafruit invests time and resources providing this open source code,
- please support Adafruit and open-source hardware by purchasing
- products from Adafruit!
-
- MIT license, check LICENSE for more information
- All text above, and the splash screen below must be included in
- any redistribution
-*********************************************************************/
+/*!
+ * This is adapted by Teknikio from  Bluefruit52Lib examples for the Arduino platform.  It is
+ * designed specifically to work with the Teknikio Bluebird boards.
+ *
+ * Originally written by and for Adafruit Industries.
+ *
+ * BSD license, all text here must be included in any redistribution.
+ *
+ */
 
 /* This sketch demonstrate the BLEAncs service. After uploading, go to
  * iOS setting and connect to Bluefruit, and then press PAIR. Bluefruit
@@ -39,20 +35,15 @@ void setup()
   Serial.begin(115200);
   while ( !Serial ) delay(10);   // for nrf52840 with native usb
 
-  Serial.println("Bluefruit52 BLE ANCS Example");
+  Serial.println("Bluebird BLE ANCS Example");
   Serial.println("----------------------------\n");
 
-  Serial.println("Go to iOS's Bluetooth settings and connect to Bluefruit52");
+  Serial.println("Go to iOS's Bluetooth settings and connect to Bluebird");
   Serial.println("It may appear up as 'Accessory' depending on your OS version.");
-
-  // Config the peripheral connection with maximum bandwidth
-  // more SRAM required by SoftDevice
-  // Note: All config***() function must be called before begin()
-  Bluefruit.configPrphBandwidth(BANDWIDTH_MAX);
 
   Bluefruit.begin();
   Bluefruit.setTxPower(4);    // Check bluefruit.h for supported values
-  Bluefruit.setName("Bluefruit52");
+  Bluefruit.setName("Bluebird");
   Bluefruit.Periph.setConnectCallback(connect_callback);
   Bluefruit.Periph.setDisconnectCallback(disconnect_callback);
 

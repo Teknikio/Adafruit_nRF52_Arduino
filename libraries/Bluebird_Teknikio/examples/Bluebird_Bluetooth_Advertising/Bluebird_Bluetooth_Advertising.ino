@@ -54,7 +54,7 @@ void setup() {
   bluebird_beacon_data[11]= 0xAA;
 
   // Add the new data on the manufacturer Data
-  Bluefruit.Advertising.addManufacturerData(bluebird_beacon_sr_data,sizeof(bluebird_beacon_sr_data));
+  Bluefruit.Advertising.addManufacturerData(bluebird_beacon_data,sizeof(bluebird_beacon_data));
   // Start the advertisement
   Bluefruit.Advertising.start(0);  
 }

@@ -1,16 +1,12 @@
-/*********************************************************************
- This is an example for our nRF52 based Bluefruit LE modules
-
- Pick one up today in the adafruit shop!
-
- Adafruit invests time and resources providing this open source code,
- please support Adafruit and open-source hardware by purchasing
- products from Adafruit!
-
- MIT license, check LICENSE for more information
- All text above, and the splash screen below must be included in
- any redistribution
-*********************************************************************/
+/*!
+ * This is adapted by Teknikio from  Bluefruit52Lib examples for the Arduino platform.  It is
+ * designed specifically to work with the Teknikio Bluebird boards.
+ *
+ * Originally written by and for Adafruit Industries.
+ *
+ * BSD license, all text here must be included in any redistribution.
+ *
+ */
 #include <bluefruit.h>
 #include <Adafruit_LittleFS.h>
 #include <InternalFileSystem.h>
@@ -26,22 +22,13 @@ void setup()
   Serial.begin(115200);
   while ( !Serial ) delay(10);   // for nrf52840 with native usb
   
-  Serial.println("Bluefruit52 BLEUART Example");
+  Serial.println("Bluebird BLEUART Example");
   Serial.println("---------------------------\n");
 
-  // Setup the BLE LED to be enabled on CONNECT
-  // Note: This is actually the default behaviour, but provided
-  // here in case you want to control this LED manually via PIN 19
-  Bluefruit.autoConnLed(true);
-
-  // Config the peripheral connection with maximum bandwidth 
-  // more SRAM required by SoftDevice
-  // Note: All config***() function must be called before begin()
-  Bluefruit.configPrphBandwidth(BANDWIDTH_MAX);
-
+ 
   Bluefruit.begin();
   Bluefruit.setTxPower(4);    // Check bluefruit.h for supported values
-  Bluefruit.setName("Bluefruit52");
+  Bluefruit.setName("Bluebird");
   //Bluefruit.setName(getMcuUniqueID()); // useful testing with multiple central connections
   Bluefruit.Periph.setConnectCallback(connect_callback);
   Bluefruit.Periph.setDisconnectCallback(disconnect_callback);
@@ -50,8 +37,8 @@ void setup()
   bledfu.begin();
 
   // Configure and Start Device Information Service
-  bledis.setManufacturer("Adafruit Industries");
-  bledis.setModel("Bluefruit Feather52");
+  bledis.setManufacturer("Teknikio");
+  bledis.setModel("Bluebird");
   bledis.begin();
 
   // Configure and Start BLE Uart Service
@@ -64,7 +51,7 @@ void setup()
   // Set up and start advertising
   startAdv();
 
-  Serial.println("Please use Adafruit's Bluefruit LE app to connect in UART mode");
+  Serial.println("Please use Teknikio's Tekniverse app to connect in UART mode");
   Serial.println("Once connected, enter character(s) that you wish to send");
 }
 
