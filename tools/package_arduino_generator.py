@@ -16,7 +16,7 @@ PATH_FOLDER = 'C:\\Users\\fabie\\Documents\\GitHub\\Teknikio_nRF52_Arduino\\'
 PATH_BASE = 'Teknikio_nRF52_Arduino\\'
 PATH_ADAFRUIT_TOOL= 'tools\\adafruit-nrfutil\\macos\\adafruit-nrfutil'
 FILE_NAME = 'Teknikio_nRF52_Arduino.tar'
-VERSION = '0.15.8'
+VERSION = '0.16.0'
 DESTINATION_FOLDER = 'C:\\Users\\fabie\\Documents\\GitHub\\Githubio\\arduino-support-packages\\'
 
 

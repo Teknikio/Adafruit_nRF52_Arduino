@@ -61,3 +61,46 @@ bluebird.menu.debug.l2=Level 2 (Full Debug)
 bluebird.menu.debug.l2.build.debug_flags=-DCFG_DEBUG=2
 bluebird.menu.debug.l3=Level 3 (Segger SystemView)
 bluebird.menu.debug.l3.build.debug_flags=-DCFG_DEBUG=3
+
+# ----------------------------------
+# Teknikio Chicklet
+# ----------------------------------
+chicklet.name=Teknikio Chicklet
+chicklet.bootloader.tool=bootburn
+
+# Upload
+chicklet.upload.tool=nrfutil
+chicklet.upload.protocol=nrfutil
+chicklet.upload.use_1200bps_touch=true
+chicklet.upload.wait_for_upload_port=true
+chicklet.upload.maximum_size=815104
+chicklet.upload.maximum_data_size=248832
+
+# Build
+chicklet.build.mcu=cortex-m4
+chicklet.build.f_cpu=64000000
+chicklet.build.board=TEKNIKIO_CHICKLET
+chicklet.build.core=nRF5
+chicklet.build.variant=teknikio_chicklet
+chicklet.build.usb_manufacturer="Nordic"
+chicklet.build.usb_product="nRF52840 DK"
+chicklet.build.extra_flags=-DNRF52840_XXAA {build.flags.usb}
+chicklet.build.ldscript=nrf52840_s140_v6.ld
+chicklet.build.vid=0x239A
+chicklet.build.pid=0x8029
+
+# SofDevice Menu
+chicklet.menu.softdevice.s140v6=0.2.13 SoftDevice s140 6.1.1
+chicklet.menu.softdevice.s140v6.build.sd_name=s140
+chicklet.menu.softdevice.s140v6.build.sd_version=6.1.1
+chicklet.menu.softdevice.s140v6.build.sd_fwid=0x00B6
+
+# Debug Menu
+chicklet.menu.debug.l0=Level 0 (Release)
+chicklet.menu.debug.l0.build.debug_flags=-DCFG_DEBUG=0
+chicklet.menu.debug.l1=Level 1 (Error Message)
+chicklet.menu.debug.l1.build.debug_flags=-DCFG_DEBUG=1
+chicklet.menu.debug.l2=Level 2 (Full Debug)
+chicklet.menu.debug.l2.build.debug_flags=-DCFG_DEBUG=2
+chicklet.menu.debug.l3=Level 3 (Segger SystemView)
+chicklet.menu.debug.l3.build.debug_flags=-DCFG_DEBUG=3
