@@ -21,11 +21,15 @@
 #endif
 
 #define BLUEBIRD_NEOPIXELPIN  PIN_NEOPIXEL ///< neopixel pin
-#define BLUEBIRD_BUZZER       PIN_BUZZER ///< buzzer pin
-#define BLUEBIRD_LIGHTSENSOR  A4 ///< light sensor pin  
+
+#if defined(_VARIANT_BLUEBIRD_)
+  #define BLUEBIRD_BUZZER       PIN_BUZZER ///< buzzer pin
+  #define BLUEBIRD_LIGHTSENSOR  A4 ///< light sensor pin  
+  #define BLUEBIRD_COLOR_ENABLE PIN_COLOR_ENABLE
+  #define BLUEBIRD_ICM_ADDRESS  false
+#endif
 #define BLUEBIRD_WIRE_INT     PIN_WIRE_INT
-#define BLUEBIRD_COLOR_ENABLE PIN_COLOR_ENABLE
-#define BLUEBIRD_ICM_ADDRESS  false
+
 
 #define BLUEBIRD_MIN_CALIB 1
 #define BLUEBIRD_MAX_CALIB 2
@@ -126,29 +130,6 @@
 #define NOTE_D8  4699
 #define NOTE_DS8 4978
 
-
-
-const uint8_t gamma8[] = {
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-  1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3,
-  3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6,
-  6, 6, 6, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 10, 10,
-  11, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17,
-  18, 19, 19, 20, 20, 21, 22, 23, 23, 24, 25, 26, 26, 27, 28,
-  29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
-  45, 46, 47, 49, 50, 51, 53, 54, 56, 57, 59, 60, 62, 63, 65,
-  67, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94,
-  97, 99, 101, 104, 106, 109, 111, 114, 116, 119, 122, 125, 128, 130, 133,
-  136, 139, 143, 146, 149, 152, 156, 159, 162, 166, 170, 173, 177, 181, 184,
-  188, 192, 196, 200, 205, 209, 213, 217, 222, 226, 231, 236, 240, 245, 250,
-  255 };
-
-
 /*! 
   @brief Configuration to tune the color sensing logic:
    Amount of time (in milliseconds) to wait between 
@@ -167,7 +148,7 @@ class Bluebird {
   bool begin(uint8_t brightness=20);
 
   Bluebird_NeoPixel strip; ///< the neopixel strip object
-  ICM20600 icm20600;
+    ICM20600 icm20600;
 
   uint8_t min_red;
   uint8_t min_green;
@@ -178,19 +159,19 @@ class Bluebird {
   uint8_t max_blue;
 
 
-  void playTone(uint16_t freq, uint16_t time, bool wait=true);
-  uint16_t lightSensor(void);
+    void playTone(uint16_t freq, uint16_t time, bool wait=true);
+    uint16_t lightSensor(void);
 
-  // Accelerometer
-  int16_t motionX(void);
-  int16_t motionY(void);
-  int16_t motionZ(void);
+    // Accelerometer
+    int16_t motionX(void);
+    int16_t motionY(void);
+    int16_t motionZ(void);
 
-  int16_t rotationX(void);
-  int16_t rotationY(void);
-  int16_t rotationZ(void);
+    int16_t rotationX(void);
+    int16_t rotationY(void);
+    int16_t rotationZ(void);
 
-  int16_t getTemperature(void);
+    int16_t getTemperature(void);
 
 
 /**************************************************************************/
@@ -222,13 +203,12 @@ class Bluebird {
   @param b a 0 to 255 value corresponding to the blue component of the desired color.  
 */
 /**************************************************************************/
-  void setPixelColor(uint8_t p, uint8_t r, uint8_t g, uint8_t b) {strip.setPixelColor(p, gamma8[r], gamma8[g], gamma8[b]); strip.show();}
+  void setPixelColor(uint8_t p, uint8_t r, uint8_t g, uint8_t b) {strip.setPixelColor(p, r, g, b); strip.show();}
   
 /*!  @brief set the global brightness of all neopixels.
      @param b a 0 to 255 value corresponding to the desired brightness. The default brightness
      of all neopixels is 30. */
-  void setBrightness(uint16_t b){strip.setBrightness(b);strip.show();}
-
+  void setBrightness(uint8_t b);
   // Basic RGB color sensing with the light sensor and nearby neopixel.
   // Both functions do the same thing and just differ in how they return the
   // result, either as explicit RGB bytes or a 24-bit RGB color value.
@@ -254,7 +234,6 @@ class Bluebird {
     senseColor(red, green, blue);
     return ((uint32_t)red << 16) | ((uint32_t)green << 8) | blue;
   }
-
  private:
 
 

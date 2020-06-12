@@ -16,8 +16,8 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef _VARIANT_BLUEBIRD_
-#define _VARIANT_BLUEBIRD_
+#ifndef _VARIANT_CHICKLET_
+#define _VARIANT_CHICKLET_
 
 /** Master clock frequency */
 #define VARIANT_MCK       (64000000ul)
@@ -88,6 +88,13 @@ static const uint8_t A7  = PIN_A7 ;
 #define PIN_WIRE_SCL        (43)
 #define PIN_WIRE_INT		(45)
 
+/*
+* SPI Interfaces
+*/
+#define PIN_SPI_MOSI		(13) 
+#define PIN_SPI_MISO		(15)
+#define PIN_SPI_SCK			(14)
+
 #define USB_MSC_BLOCK_SIZE    512
 #define USB_MSC_BLOCK_COUNT   ((2*1024*1024) / USB_MSC_BLOCK_SIZE)
 
@@ -99,4 +106,4 @@ static const uint8_t A7  = PIN_A7 ;
 *        Arduino objects - C++ only
 *----------------------------------------------------------------------------*/
 
-#endif
+#endif // VARIANT CHICKLET

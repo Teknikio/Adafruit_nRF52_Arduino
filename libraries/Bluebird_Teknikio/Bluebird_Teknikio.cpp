@@ -155,6 +155,39 @@ void Bluebird::senseColor(uint8_t& red, uint8_t& green, uint8_t& blue) {
   }
   
 }
+/*!
+  @brief   Adjust output brightness. Does not immediately affect what's
+           currently displayed on the LEDs. 
+  @param   b  Brightness setting, 0=minimum (off), 255=brightest. with a logarithmic scale
+  @note    This was intended for one-time use in one's setup() function,
+           not as an animation effect in itself. Because of the way this
+           library "pre-multiplies" LED colors in RAM, changing the
+           brightness is often a "lossy" operation -- what you write to
+           pixels isn't necessary the same as what you'll read back.
+           Repeated brightness changes using this function exacerbate the
+           problem. Smart programs therefore treat the strip as a
+           write-only resource, maintaining their own state to render each
+           frame of an animation, not relying on read-modify-write.
+*/
+void Bluebird::setBrightness(uint8_t b) {
+  int valeur;
+
+  if (b == 0){
+    strip.setBrightness(0);
+    strip.show();
+  }
+  else if(b <6){
+    valeur = int(255.0*log10((float(6)*10.0/255.0)));
+    strip.setBrightness(valeur);
+    strip.show();
+  }
+  else{
+    valeur = int(255.0*log10((float(b)*10.0/255.0)));
+    strip.setBrightness(valeur);
+    strip.show();
+  }
+
+}
 
 /**************************************************************************/
 /*!
