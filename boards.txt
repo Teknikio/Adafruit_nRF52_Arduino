@@ -44,7 +44,7 @@ bluebird.build.usb_product="nRF52840 DK"
 bluebird.build.extra_flags=-DNRF52840_XXAA {build.flags.usb}
 bluebird.build.ldscript=nrf52840_s140_v7.ld
 bluebird.build.vid=0x239A
-bluebird.build.pid=0x8029
+bluebird.build.pid=0x0029
 
 # SofDevice Menu
 bluebird.menu.softdevice.s140v7=0.2.13 SoftDevice s140 7.0.1

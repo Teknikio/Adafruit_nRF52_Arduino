@@ -22,8 +22,8 @@
 /** Master clock frequency */
 #define VARIANT_MCK       (64000000ul)
 
-#define USE_LFXO      // Board uses 32khz crystal for LF
-//#define USE_LFRC    // Board uses RC for LF
+//#define USE_LFXO      // Board uses 32khz crystal for LF
+#define USE_LFRC    // Board uses RC for LF
 
 /*----------------------------------------------------------------------------
 *        Headers
@@ -79,18 +79,27 @@ static const uint8_t A7  = PIN_A7 ;
 #define PIN_SERIAL_RX       (7)
 #define PIN_SERIAL_TX       (8)
 
+#define PIN_SERIAL1_RX       (7)
+#define PIN_SERIAL1_TX       (8)
 /*
 * Wire Interfaces
 */
-#define WIRE_INTERFACES_COUNT 1
+#define WIRE_INTERFACES_COUNT 2
 
 #define PIN_WIRE_SDA        (44)
 #define PIN_WIRE_SCL        (43)
-#define PIN_WIRE_INT		(45)
+#define PIN_WIRE_INT		(42)
+
+#define PIN_WIRE1_SDA       (11)
+#define PIN_WIRE1_SCL       (40)
 
 #define PIN_BUZZER      	(46)
 
 #define PIN_COLOR_ENABLE    (30)
+
+#define PIN_SERVO0			(13)
+#define PIN_SERVO1			(15)
+
 
 #define USB_MSC_BLOCK_SIZE    512
 #define USB_MSC_BLOCK_COUNT   ((2*1024*1024) / USB_MSC_BLOCK_SIZE)

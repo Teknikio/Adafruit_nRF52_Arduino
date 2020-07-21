@@ -12,9 +12,13 @@
 #define _BLUEBIRD_TEKNIKIO_H_
 
 #include <Arduino.h>
+#include <Servo.h>
 #include "utility/Bluebird_NeoPixel.h"
 #include "utility/TK_Firmata.h"
 #include "utility/ICM20600.h"
+#include "Servo.h"
+
+
 
 #ifndef NOT_AN_INTERRUPT // Not defined in Arduino 1.0.5
   #define NOT_AN_INTERRUPT -1 ///< Pin is not on an interrupt
@@ -28,12 +32,25 @@
   #define BLUEBIRD_COLOR_ENABLE PIN_COLOR_ENABLE
   #define BLUEBIRD_ICM_ADDRESS  false
 #endif
+
+
+#define BLUEBIRD_LED_1 	26
+#define BLUEBIRD_LED_2 	5
+#define BLUEBIRD_LED_3 	4
+#define BLUEBIRD_LED_4 	6
+#define BLUEBIRD_LED_5 	41
+#define BLUEBIRD_LED_6 	12
+#define ROW_SIZE		5
+#define COLUMN_SIZE		6
+
+
 #define BLUEBIRD_WIRE_INT     PIN_WIRE_INT
 
 
 #define BLUEBIRD_MIN_CALIB 1
 #define BLUEBIRD_MAX_CALIB 2
 #define BLUEBIRD_CALIB_SAMPLES 10
+
 
 
 /********************************************************************
@@ -138,17 +155,21 @@
 */
 #define LIGHT_SETTLE_MS 100  
 
+
+
 /**************************************************************************/
 /*! 
     @brief  Class that stores state and functions for interacting with Bluebird hardware
 */
 /**************************************************************************/
 class Bluebird {
- public:
-  bool begin(uint8_t brightness=20);
+public:
+	bool begin(uint8_t brightness=20);
 
   Bluebird_NeoPixel strip; ///< the neopixel strip object
-    ICM20600 icm20600;
+  ICM20600 icm20600;
+  Servo servo1;
+  Servo servo2;
 
   uint8_t min_red;
   uint8_t min_green;
@@ -158,20 +179,24 @@ class Bluebird {
   uint8_t max_green;
   uint8_t max_blue;
 
+  uint8_t row_index;
+  uint8_t col_index;
+  uint8_t ledpattern[ROW_SIZE][COLUMN_SIZE] = {0};
 
-    void playTone(uint16_t freq, uint16_t time, bool wait=true);
-    uint16_t lightSensor(void);
+
+  void playTone(uint16_t freq, uint16_t time, bool wait=true);
+  uint16_t lightSensor(void);
 
     // Accelerometer
-    int16_t motionX(void);
-    int16_t motionY(void);
-    int16_t motionZ(void);
+  int16_t motionX(void);
+  int16_t motionY(void);
+  int16_t motionZ(void);
 
-    int16_t rotationX(void);
-    int16_t rotationY(void);
-    int16_t rotationZ(void);
+  int16_t rotationX(void);
+  int16_t rotationY(void);
+  int16_t rotationZ(void);
 
-    int16_t getTemperature(void);
+  int16_t getTemperature(void);
 
 
 /**************************************************************************/
@@ -220,6 +245,15 @@ class Bluebird {
   void calibratesenseColor(uint8_t mode,uint8_t& red, uint8_t& green, uint8_t& blue);
 
 
+  void resetLedMatrix(void);
+
+  void setLedMatrix(int row,int column);
+
+  void startTimer(void);
+
+  void matrixHandler(void);
+
+  void changepattern(void *m_ledpattern);
 /**************************************************************************/
 /*! 
   @brief detect a color using the onboard light sensor
@@ -230,11 +264,11 @@ class Bluebird {
   uint32_t senseColor() {
     // Use the individual color component color sense function and then recombine
     // tbe components into a 24-bit color value.
-    uint8_t red, green, blue;
-    senseColor(red, green, blue);
-    return ((uint32_t)red << 16) | ((uint32_t)green << 8) | blue;
+  	uint8_t red, green, blue;
+  	senseColor(red, green, blue);
+  	return ((uint32_t)red << 16) | ((uint32_t)green << 8) | blue;
   }
- private:
+private:
 
 
 };
