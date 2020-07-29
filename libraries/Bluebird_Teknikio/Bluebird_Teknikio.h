@@ -168,8 +168,8 @@ public:
 
   Bluebird_NeoPixel strip; ///< the neopixel strip object
   ICM20600 icm20600;
+  Servo servo0;
   Servo servo1;
-  Servo servo2;
 
   uint8_t min_red;
   uint8_t min_green;
