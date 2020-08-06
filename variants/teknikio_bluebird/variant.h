@@ -97,8 +97,8 @@ static const uint8_t A7  = PIN_A7 ;
 
 #define PIN_COLOR_ENABLE    (30)
 
-#define PIN_SERVO0			(13)
-#define PIN_SERVO1			(15)
+#define PIN_SERVO_L			(13)
+#define PIN_SERVO_R			(15)
 
 
 #define USB_MSC_BLOCK_SIZE    512

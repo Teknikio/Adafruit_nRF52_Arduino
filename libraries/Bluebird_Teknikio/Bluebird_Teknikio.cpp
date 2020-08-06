@@ -70,8 +70,8 @@ bool Bluebird::begin(uint8_t brightness) {
   icm20600 = ICM20600(BLUEBIRD_ICM_ADDRESS);
   icm20600.initialize();
 
-  servo0.attach(PIN_SERVO0);
-  servo1.attach(PIN_SERVO1);
+  servoL.attach(PIN_SERVO_L);
+  servoR.attach(PIN_SERVO_R);
 
   startTimer();
 
